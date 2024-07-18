@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('../db/index.js');
 
+// GET route 
 router.get('/', function (req, res) {
     db.User.findAll().then(function (users) {
         res.json(users);
@@ -11,8 +12,11 @@ router.get('/', function (req, res) {
     });
 });
 
+// POST route 
 router.post('/', function (req, res) {
-    db.User.create({ firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com' })
+    var userData = req.body;
+
+    db.User.create(userData)
         .then(function (newUser) {
             res.json(newUser);
         })

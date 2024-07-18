@@ -1,9 +1,12 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var helloRouter = require('./routes/hello.js');
 var db = require('./db/index.js');
 
 var app = express();
 var port = 3000;
+
+app.use(bodyParser.json());
 
 db.sequelize.sync().then(function () {
     console.log('Database connected and synchronized.');
