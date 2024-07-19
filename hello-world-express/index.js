@@ -8,14 +8,17 @@ var port = 3000;
 
 app.use(bodyParser.json());
 
-db.sequelize.sync().then(function () {
-    console.log('Database connected and synchronized.');
+(async function () {
+    try {
+        await db.sequelize.sync();
+        console.log('Database connected and synchronized.');
 
-    app.use('/hello', helloRouter);
+        app.use('/hello', helloRouter);
 
-    app.listen(port, function () {
-        console.log('Example app listening at http://localhost:' + port);
-    });
-}).catch(function (err) {
-    console.error('Unable to connect to the database:', err);
-});
+        app.listen(port, function () {
+            console.log('Example app listening at http://localhost:' + port);
+        });
+    } catch (err) {
+        console.error('Unable to connect to the database:', err);
+    }
+})();
