@@ -5,11 +5,11 @@ module.exports = {
     await queryInterface.addColumn('Users', 'password', {
       type: Sequelize.STRING,
       allowNull: false,
-      defaultValue: 'defaultpasswordhash'
+      defaultValue: 'defaultpasswordhash',
     });
   },
 
   down: async (queryInterface, Sequelize) => {
     await queryInterface.removeColumn('Users', 'password');
-  }
+  },
 };
